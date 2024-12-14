@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Cuiseur automatique",
+    "description": "Cuiseur automatique pour cuire des aliments",
+    "price": 1000,
+    "value": 5,
+    "type": "per_second"
+  },
+  {
+    "name": "Machine à café",
+    "description": "Machine à café pour faire du café",
+    "price": 500,
+    "value": 600,
+    "type": "instant_gain"
+  }
+]
