@@ -19,16 +19,12 @@ export const useCookies = () => {
   useEffect(() => {
     const intervalManager = IntervalManager.getIntervalManager();
 
-    console.log(cookies.objects);
-
     cookies.objects.forEach((object) => {
       if (object.type === EffectType.PER_SECOND) {
         intervalManager.addInterval(() => {
           console.log("incrementing", object.value);
           dispatch(increment(object.value));
         }, 1000);
-      } else if (object.type === EffectType.INSTANT_GAIN) {
-        dispatch(increment(object.value));
       }
     });
 
@@ -55,6 +51,10 @@ export const useCookies = () => {
         "objects",
         JSON.stringify([...cookies.objects, object])
       );
+
+      if (object.type === EffectType.INSTANT_GAIN) {
+        dispatch(increment(object.value));
+      }
     },
     refreshCookies: () => {
       dispatch(setAmount(0));
