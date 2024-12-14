@@ -1,13 +1,32 @@
 import { useCookies } from "../hooks/useCookies";
 import cookieImg from "../assets/cookie.webp";
 import { Shop } from "./Shop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RotateCcwIcon, ShoppingCartIcon } from "lucide-react";
 import { AnimatePresence } from "motion/react";
+import { EffectType } from "../store/cookie";
+import { IntervalManager } from "../utils/IntervalManager";
 
 export function Main() {
   const { cookies, increment, refreshCookies } = useCookies();
   const [isShopOpen, setIsShopOpen] = useState(false);
+
+  useEffect(() => {
+    const intervalManager = IntervalManager.getIntervalManager();
+
+    cookies.objects.forEach((object) => {
+      if (object.type === EffectType.PER_SECOND) {
+        intervalManager.addInterval(() => {
+          increment(object.value);
+        }, 1000);
+      }
+    });
+
+    return () => {
+      intervalManager.clearIntervals();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cookies.objects]);
 
   return (
     <div className="flex h-screen w-full flex-col gap-3 justify-center items-center bg-yellow-100">

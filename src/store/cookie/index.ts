@@ -47,13 +47,14 @@ export const cookieSlice = createSlice({
       state.amount -= action.payload ?? 1;
       localStorage.setItem("cookies", JSON.stringify(state.amount));
     },
-    setAmount: (state, action: PayloadAction<number>) => {
-      state.amount = action.payload;
-      localStorage.setItem("cookies", JSON.stringify(state.amount));
+    reset: (state) => {
+      state.amount = 0;
+      state.objects = [];
+      localStorage.removeItem("cookies");
+      localStorage.removeItem("objects");
     },
   },
 });
 
-export const { increment, addObject, decrement, setAmount } =
-  cookieSlice.actions;
+export const { increment, addObject, decrement, reset } = cookieSlice.actions;
 export default cookieSlice.reducer;

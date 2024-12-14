@@ -4,34 +4,16 @@ import {
   addObject,
   decrement,
   increment,
-  setAmount,
   Object,
   EffectType,
+  reset,
 } from "../store/cookie";
 import { IntervalManager } from "../utils/IntervalManager";
-import { useEffect } from "react";
 
 export const useCookies = () => {
   const cookies = useSelector((state: RootState) => state.cookies);
   const dispatch = useDispatch();
   const intervalManager = IntervalManager.getIntervalManager();
-
-  useEffect(() => {
-    const intervalManager = IntervalManager.getIntervalManager();
-
-    cookies.objects.forEach((object) => {
-      if (object.type === EffectType.PER_SECOND) {
-        intervalManager.addInterval(() => {
-          dispatch(increment(object.value));
-        }, 1000);
-      }
-    });
-
-    return () => {
-      intervalManager.clearIntervals();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cookies.objects]);
 
   return {
     cookies,
@@ -56,9 +38,7 @@ export const useCookies = () => {
       }
     },
     refreshCookies: () => {
-      dispatch(setAmount(0));
-      localStorage.removeItem("cookies");
-      localStorage.removeItem("objects");
+      dispatch(reset());
       intervalManager.clearIntervals();
     },
   };

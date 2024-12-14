@@ -1,16 +1,72 @@
 [
   {
-    "name": "Cuiseur automatique",
-    "description": "Cuiseur automatique pour cuire des aliments",
-    "price": 1000,
+    "name": "Curseur automatique",
+    "description": "Un curseur qui clique automatiquement sur le cookie",
+    "price": 15,
+    "value": 1,
+    "type": "per_second"
+  },
+  {
+    "name": "Grand-mère pâtissière",
+    "description": "Une grand-mère qui prépare des cookies",
+    "price": 100,
     "value": 5,
     "type": "per_second"
   },
   {
-    "name": "Machine à café",
-    "description": "Machine à café pour faire du café",
-    "price": 500,
-    "value": 600,
+    "name": "Ferme à cookies",
+    "description": "Une ferme qui cultive des cookies",
+    "price": 1100,
+    "value": 20,
+    "type": "per_second"
+  },
+  {
+    "name": "Mine de pépites de chocolat",
+    "description": "Une mine qui extrait des pépites de chocolat",
+    "price": 12000,
+    "value": 100,
+    "type": "per_second"
+  },
+  {
+    "name": "Usine de cookies",
+    "description": "Une usine qui produit des cookies en masse",
+    "price": 130000,
+    "value": 500,
+    "type": "per_second"
+  },
+  {
+    "name": "Banque de cookies",
+    "description": "Une banque qui génère des intérêts en cookies",
+    "price": 1400000,
+    "value": 2000,
+    "type": "per_second"
+  },
+  {
+    "name": "Temple du cookie sacré",
+    "description": "Un temple qui prie pour faire apparaître des cookies",
+    "price": 20000000,
+    "value": 10000,
+    "type": "per_second"
+  },
+  {
+    "name": "Tour de magie cookiesque",
+    "description": "Une tour magique qui fait apparaître des cookies",
+    "price": 330000000,
+    "value": 50000,
+    "type": "per_second"
+  },
+  {
+    "name": "Boost de cookies",
+    "description": "Ajoute instantanément un grand nombre de cookies à votre total",
+    "price": 50000000,
+    "value": 5000000,
+    "type": "instant_gain"
+  },
+  {
+    "name": "Pluie de cookies",
+    "description": "Fait pleuvoir une quantité massive de cookies instantanément",
+    "price": 100000000,
+    "value": 15000000,
     "type": "instant_gain"
   }
 ]
