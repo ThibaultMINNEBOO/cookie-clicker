@@ -17,7 +17,7 @@ export function Shop({ onClose }: { onClose: () => void }) {
       setAlert("Pas assez de cookies");
       setTimeout(() => {
         setAlert(null);
-      }, 1200);
+      }, 5000);
     }
   };
 

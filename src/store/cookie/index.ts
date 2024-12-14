@@ -22,11 +22,18 @@ const fetchCookies = () => {
   return cookies ? Number(cookies) : 0;
 };
 
+const fetchObjects = (): Object[] => {
+  const objects = localStorage.getItem("objects");
+  const parsedObjects: Object[] = objects ? JSON.parse(objects) : [];
+
+  return parsedObjects;
+};
+
 export const cookieSlice = createSlice({
   name: "cookie",
   initialState: {
     amount: fetchCookies(),
-    objects: [] as Object[],
+    objects: fetchObjects(),
   },
   reducers: {
     increment: (state, action: PayloadAction<number>) => {

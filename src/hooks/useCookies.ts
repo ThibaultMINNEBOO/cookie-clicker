@@ -3,16 +3,40 @@ import { RootState } from "../store";
 import {
   addObject,
   decrement,
-  EffectType,
   increment,
   setAmount,
   Object,
+  EffectType,
 } from "../store/cookie";
 import { IntervalManager } from "../utils/IntervalManager";
+import { useEffect } from "react";
 
 export const useCookies = () => {
   const cookies = useSelector((state: RootState) => state.cookies);
   const dispatch = useDispatch();
+  const intervalManager = IntervalManager.getIntervalManager();
+
+  useEffect(() => {
+    const intervalManager = IntervalManager.getIntervalManager();
+
+    console.log(cookies.objects);
+
+    cookies.objects.forEach((object) => {
+      if (object.type === EffectType.PER_SECOND) {
+        intervalManager.addInterval(() => {
+          console.log("incrementing", object.value);
+          dispatch(increment(object.value));
+        }, 1000);
+      } else if (object.type === EffectType.INSTANT_GAIN) {
+        dispatch(increment(object.value));
+      }
+    });
+
+    return () => {
+      intervalManager.clearIntervals();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cookies.objects]);
 
   return {
     cookies,
@@ -27,19 +51,15 @@ export const useCookies = () => {
       dispatch(decrement(object.price));
       dispatch(addObject(object));
 
-      if (object.type === EffectType.INSTANT_GAIN) {
-        dispatch(increment(object.value));
-      } else if (object.type === EffectType.PER_SECOND) {
-        const intervalManager = IntervalManager.getIntervalManager();
-
-        intervalManager.addInterval(() => {
-          dispatch(increment(object.value));
-        }, 1000);
-      }
+      localStorage.setItem(
+        "objects",
+        JSON.stringify([...cookies.objects, object])
+      );
     },
     refreshCookies: () => {
       dispatch(setAmount(0));
-      const intervalManager = IntervalManager.getIntervalManager();
+      localStorage.removeItem("cookies");
+      localStorage.removeItem("objects");
       intervalManager.clearIntervals();
     },
   };
