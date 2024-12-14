@@ -22,7 +22,6 @@ export const useCookies = () => {
     cookies.objects.forEach((object) => {
       if (object.type === EffectType.PER_SECOND) {
         intervalManager.addInterval(() => {
-          console.log("incrementing", object.value);
           dispatch(increment(object.value));
         }, 1000);
       }
