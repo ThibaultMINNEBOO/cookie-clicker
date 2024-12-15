@@ -28,7 +28,7 @@ export function Shop({ onClose }: { onClose: () => void }) {
       exit={{ opacity: 0 }}
       className="absolute w-full h-full bg-yellow-200"
     >
-      <div className="flex flex-wrap flex-col gap-24 h-screen justify-center items-center">
+      <div className="flex flex-col gap-24 h-screen justify-center items-center">
         {alert && (
           <div className="bg-red-500 text-white p-3 rounded-md shadow-md">
             {alert}
