@@ -5,9 +5,10 @@ import { motion } from "motion/react";
 import { Item } from "./Item";
 import { useCookies } from "../hooks/useCookies";
 import { useState } from "react";
+import cookieImg from "../assets/cookie.webp";
 
 export function Shop({ onClose }: { onClose: () => void }) {
-  const { addObject } = useCookies();
+  const { addObject, cookies } = useCookies();
   const [alert, setAlert] = useState<string | null>(null);
 
   const onClick = (object: Object) => {
@@ -35,7 +36,7 @@ export function Shop({ onClose }: { onClose: () => void }) {
           </div>
         )}
         <h3 className="text-3xl font-extrabold font-dyna">Magasin d'objet</h3>
-        <div className="flex gap-3 flex-wrap justify-center items-center">
+        <div className="flex gap-3 flex-wrap justify-center mb-24 items-center">
           {objects.map((object: Object) => {
             return (
               <Item
@@ -50,6 +51,10 @@ export function Shop({ onClose }: { onClose: () => void }) {
       <button onClick={onClose} className="absolute right-10 top-10">
         <XIcon size={30} />
       </button>
+      <div className="fixed bottom-10 shadow-inner shadow-slate-600 left-10 min-w-40 px-3 flex items-center justify-start rounded-full bg-slate-800 text-white">
+        <img src={cookieImg} width={50} height={50} alt="Image de cookie" />
+        {cookies.amount}
+      </div>
     </motion.div>
   );
 }
